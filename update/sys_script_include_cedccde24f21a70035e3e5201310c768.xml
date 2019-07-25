@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_thjuh_mailnow.utils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>utils</name>
+        <script><![CDATA[var utils = Class.create();
+utils.prototype = {
+	initialize: function() {
+	},
+
+	DELAY: gs.getProperty("x_thjuh_mailnow.default.latency") || 5,
+
+	ALLSTAFF: gs.getProperty("x_thjuh_mailnow.allstaff.email"),
+
+	fireEvent: function(event, gr, parm1, parm2, delay){
+		parm1 = parm1 || gs.getUserID();
+		parm2 = parm2 || gs.getUserName();
+		if(delay)
+			return gs.eventQueueScheduled(event, gr, parm1, parm2, delay);
+		else
+			return gs.eventQueue(event, gr, parm1, parm2);
+	},
+
+	validateEmail: function(email){
+		var regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/ig;
+		return regex.test(email);
+	},
+
+	getGroupMembers: function(groupId){
+		var returnValue = {};
+		returnValue.count = 0;
+		returnValue.userIds = [];
+		var gr = new GlideRecord('sys_user_grmember');
+		gr.addQuery("group", groupId);
+		gr.query();
+		while(gr.next()){
+			if(gr.user.active && !gs.nil(gr.user.email) && this.validateEmail(gr.user.email))
+				returnValue.userIds.push(gr.getValue("user"));
+			returnValue.count++;
+		}
+		return returnValue;
+	},
+
+	getRoledUsers: function(roleId){
+		var returnValue = {};
+		returnValue.count = 0;
+		returnValue.userIds = [];
+		var gr = new GlideRecord('sys_user_has_role');
+		gr.addQuery("role", roleId);
+		gr.query();
+		while(gr.next()){
+			if(gr.user.active && !gs.nil(gr.user.email) && this.validateEmail(gr.user.email))
+				returnValue.userIds.push(gr.getValue("user"));
+			returnValue.count++;
+		}
+		return returnValue;
+	},
+
+	getRecepients: function(gr){
+		var distList = [];
+		var allUsersArray = [];
+		var users;
+		var groups;
+		var roles;
+
+		//Get distribution list from users/roles/groups if AllStaff is false
+		if(current.allstaff == false){
+			//Push Group Members
+			if(current.groups != ''){
+				groups = current.groups.split(',');
+				for(var i in groups){
+					var grpMem = new GlideRecord('sys_user_grmember');
+					grpMem.addQuery('group', groups[i]);
+					grpMem.query();
+					while(grpMem.next()){
+						if(grpMem.user.email != ''){
+							allUsersArray.push(grpMem.user.sys_id.toString());
+						}
+					}
+				}
+			}
+
+			//Push roled users
+			if(current.roles != ''){
+				roles = current.roles.split(',');
+				for(var j in roles){
+					var roleMem = new GlideRecord('sys_user_has_role');
+					roleMem.addQuery('role', roles[j]);
+					roleMem.query();
+					while(roleMem.next()){
+						if(roleMem.user.email != ''){
+							allUsersArray.push(roleMem.user.sys_id.toString());
+						}
+					}
+				}
+			}
+
+			//Push individual users
+			if(current.users != ''){
+				users = current.users.split(',');
+				for(var k in users){
+					var user = new GlideRecord('sys_user');
+					if(user.get(users[k])){
+						if(user.email != ''){
+							allUsersArray.push(user.sys_id.toString());
+						}
+					}
+				}
+			}
+
+			distList = new global.ArrayUtil().unique(allUsersArray);
+		}
+		//Override distribution list if AllStaff is true
+		else{
+			distList.push(gs.getProperty('x_83831_email.allstaff.email'));
+		}
+	},
+
+	type: 'utils'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>pxp060</sys_created_by>
+        <sys_created_on>2018-11-06 08:11:06</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>cedccde24f21a70035e3e5201310c768</sys_id>
+        <sys_mod_count>28</sys_mod_count>
+        <sys_name>utils</sys_name>
+        <sys_package display_value="MailNow" source="x_thjuh_mailnow">b8ddaad64fa5670035e3e5201310c7cf</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="MailNow">b8ddaad64fa5670035e3e5201310c7cf</sys_scope>
+        <sys_update_name>sys_script_include_cedccde24f21a70035e3e5201310c768</sys_update_name>
+        <sys_updated_by>pxp060</sys_updated_by>
+        <sys_updated_on>2018-11-09 06:05:45</sys_updated_on>
+    </sys_script_include>
+</record_update>

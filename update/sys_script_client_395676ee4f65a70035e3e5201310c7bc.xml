@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>allstaff</field>
+        <global>true</global>
+        <messages/>
+        <name>Confirm AllStaff</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+	if (isLoading || newValue ==='') {
+		return;
+	}
+	if(newValue == 'true')
+		getAllStaff();
+}
+
+function getAllStaff(newValue){
+	var allStaff = new GlideAjax('x_thjuh_mailnow.clientUtils');
+	allStaff.addParam('sysparm_name', 'allStaffEmail');
+	allStaff.getXML(getAllStaffEmail);
+}
+
+function getAllStaffEmail(response){
+	var answer = response.responseXML.documentElement.getAttribute("answer");
+	if(confirm("An email will be sent to " + answer + " distribution list. Would you like to proceed?"))
+		return true;
+	else{
+		g_form.setValue('allstaff', 'false');
+		return false;
+	}
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>pxp060</sys_created_by>
+        <sys_created_on>2018-11-06 16:25:48</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_id>395676ee4f65a70035e3e5201310c7bc</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Confirm AllStaff</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="MailNow" source="x_thjuh_mailnow">b8ddaad64fa5670035e3e5201310c7cf</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="MailNow">b8ddaad64fa5670035e3e5201310c7cf</sys_scope>
+        <sys_update_name>sys_script_client_395676ee4f65a70035e3e5201310c7bc</sys_update_name>
+        <sys_updated_by>pxp060</sys_updated_by>
+        <sys_updated_on>2018-11-06 16:38:03</sys_updated_on>
+        <table>x_thjuh_mailnow_outbound</table>
+        <type>onChange</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

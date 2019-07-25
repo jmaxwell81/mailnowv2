@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_thjuh_mailnow.clientUtils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>clientUtils</name>
+        <script><![CDATA[var clientUtils = Class.create();
+clientUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+	allStaffEmail: function(){
+		return gs.getProperty("x_thjuh_mailnow.allstaff.email");
+	},
+	
+	notificationId: function(){
+		return gs.getProperty("x_thjuh_mailnow.default.notification.id");
+	},
+
+	validateDates: function(){
+		var toCheck = this.getParameter('sysparm_check');
+		var start = this.getParameter('sysparm_startDate');
+		var end = this.getParameter('sysparm_endDate');
+
+		var returnObj = {};
+		returnObj.validDate = true;
+		returnObj.errorMsg = '';
+		
+		var now = new GlideDateTime();
+		var startDate = new GlideDateTime();
+		var endDate = new GlideDateTime();
+		startDate.setDisplayValueInternal(start);
+		endDate.setDisplayValueInternal(end);
+
+		switch (toCheck){
+			case 'scheduleFor':
+				if(now > startDate){
+					returnObj.validDate = false;
+					returnObj.errorMsg = 'Scheduled for (' + start + ') has past.';
+				}
+				break;
+				
+			case 'reminder':
+				if(startDate == ''){
+					returnObj.validDate = false;
+					returnObj.errorMsg = 'Scheduled for is empty. Reminder date (' + end + ').';
+				}
+				
+				if(now > endDate){
+					returnObj.validDate = false;
+					returnObj.errorMsg = 'Reminder date (' + end + ') has past.';
+				}
+				
+				if(end > start){
+					returnObj.validDate = false;
+					returnObj.errorMsg = 'Reminder (' + end + ') should be before Scheduled date (' + start + ')';
+				}
+				break;
+				
+			case 'followup':
+				if(startDate == ''){
+					returnObj.validDate = false;
+					returnObj.errorMsg = 'Scheduled for is empty. followup date (' + end + ').';
+				}
+				
+				if(start > end){
+					returnObj.validDate = false;
+					returnObj.errorMsg = 'Followup (' + end + ') should be after Scheduled date (' + start + ')';
+				}
+				
+				break;
+		}
+		
+		return new global.JSON().encode(returnObj);
+	},
+	
+
+	type: 'clientUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>pxp060</sys_created_by>
+        <sys_created_on>2018-11-06 08:11:57</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>6efc41264f21a70035e3e5201310c707</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_name>clientUtils</sys_name>
+        <sys_package display_value="MailNow" source="x_thjuh_mailnow">b8ddaad64fa5670035e3e5201310c7cf</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="MailNow">b8ddaad64fa5670035e3e5201310c7cf</sys_scope>
+        <sys_update_name>sys_script_include_6efc41264f21a70035e3e5201310c707</sys_update_name>
+        <sys_updated_by>pxp060</sys_updated_by>
+        <sys_updated_on>2018-11-06 19:45:12</sys_updated_on>
+    </sys_script_include>
+</record_update>

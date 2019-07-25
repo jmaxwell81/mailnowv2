@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Inbound" max_length="40" name="x_thjuh_mailnow_inbound" type="collection">
+        <element label="Body" max_length="4000" name="body" type="string_full_utf8"/>
+        <element label="From" max_length="100" name="from" type="string"/>
+        <element display="true" label="Outbound Mail" max_length="32" name="outbound_mail" reference="x_thjuh_mailnow_outbound" type="reference"/>
+        <element choice="1" default="received" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element label="Received" sequence="0" value="received"/>
+                <element label="Responded" sequence="1" value="responded"/>
+                <element label="Converted to Incident" sequence="2" value="incident"/>
+                <element label="Converted to Request" sequence="3" value="request"/>
+            </choice>
+        </element>
+        <element label="Subject" max_length="200" name="subject" type="string"/>
+        <element label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="outbound_mail"/>
+        </index>
+        <index name="index2">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

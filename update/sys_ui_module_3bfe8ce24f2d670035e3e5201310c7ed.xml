@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_ui_module">
+    <sys_ui_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="MailNow2">26e3f2924fe5670035e3e5201310c705</application>
+        <filter/>
+        <name>Inbounds</name>
+        <order/>
+        <path/>
+        <path_relative_to_root>false</path_relative_to_root>
+        <roles>x_thjuh_mailnow.admin</roles>
+        <sys_class_name>sys_ui_module</sys_class_name>
+        <sys_created_by>pxp060</sys_created_by>
+        <sys_created_on>2018-11-06 03:40:40</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_id>3bfe8ce24f2d670035e3e5201310c7ed</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Inbounds</sys_name>
+        <sys_package display_value="MailNow" source="x_thjuh_mailnow">b8ddaad64fa5670035e3e5201310c7cf</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="MailNow">b8ddaad64fa5670035e3e5201310c7cf</sys_scope>
+        <sys_update_name>sys_ui_module_3bfe8ce24f2d670035e3e5201310c7ed</sys_update_name>
+        <sys_updated_by>pxp060</sys_updated_by>
+        <sys_updated_on>2018-11-06 03:40:40</sys_updated_on>
+        <table>x_thjuh_mailnow_inbound</table>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+    </sys_ui_module>
+</record_update>

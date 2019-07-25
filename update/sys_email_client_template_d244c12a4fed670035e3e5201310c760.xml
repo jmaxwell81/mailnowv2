@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_email_client_template">
+    <sys_email_client_template action="INSERT_OR_UPDATE">
+        <blind_copied/>
+        <body/>
+        <body_html/>
+        <condition/>
+        <content_type>text/html</content_type>
+        <copied>javascript: "prakash Parvataneni &lt;helloworld123@gmail.com&gt;"</copied>
+        <from>javascript: "prakash Parvataneni &lt;helloworld123@gmail.com&gt;"</from>
+        <name>MailNow Reply Template</name>
+        <order>100</order>
+        <recipients>javascript: "prakash Parvataneni &lt;helloworld123@gmail.com&gt;"</recipients>
+        <reply_to>javascript: "prakash Parvataneni &lt;helloworld123@gmail.com&gt;"</reply_to>
+        <subject>Re: ${subject}</subject>
+        <sys_class_name>sys_email_client_template</sys_class_name>
+        <sys_created_by>pxp060</sys_created_by>
+        <sys_created_on>2018-11-06 07:35:30</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>d244c12a4fed670035e3e5201310c760</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>MailNow Reply Template</sys_name>
+        <sys_package display_value="MailNow" source="x_thjuh_mailnow">b8ddaad64fa5670035e3e5201310c7cf</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="MailNow">b8ddaad64fa5670035e3e5201310c7cf</sys_scope>
+        <sys_update_name>sys_email_client_template_d244c12a4fed670035e3e5201310c760</sys_update_name>
+        <sys_updated_by>pxp060</sys_updated_by>
+        <sys_updated_on>2018-11-06 08:09:43</sys_updated_on>
+        <table>x_thjuh_mailnow_inbound</table>
+    </sys_email_client_template>
+</record_update>

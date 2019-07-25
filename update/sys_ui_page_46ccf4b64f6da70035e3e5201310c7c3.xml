@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function visitItemInPortal() {
+	var locationName = gel('sys_display.location').value;  //Display value of selected locations
+	var sysId = gel('item').value;
+	var urlSuffix = '';
+
+	switch (locationName){
+		case 'Abington':
+			urlSuffix = 'sc_abington_portal';
+			break;
+		case 'Center City':
+			urlSuffix = 'sc_portal';
+			break;
+		case 'East Falls':
+			urlSuffix = 'sc_portal';
+			break;
+		case 'Kennedy':
+			urlSuffix = 'sc_portal';
+			break;
+		case 'Northeast':
+			urlSuffix = 'sc_aria_portal';
+			break;
+		default:
+			if(confirm("Selected location " + locationName + " dose not have a catalog. Would you like to visit Center City catalog instead?")){
+				urlSuffix = 'sc_portal';
+			}
+			else
+				return false;
+	}
+
+	var url = new GlideURL('/' + urlSuffix);
+	url.addParam('id', 'sc_cat_item');
+	url.addParam('sys_id', sysId);
+
+	GlideDialogWindow.get().destroy();
+	
+	window.g_navigation.openPopup(url.getURL());
+}
+
+function navigate(urlSUffix, itemId){
+	
+}
+
+function locationChange(){
+	enableButton(gel('location').value, gel('item').value);
+}
+
+function itemChange(){
+	enableButton(gel('location').value, gel('item').value);
+}
+
+function enableButton(location, item){
+	if(location && item)
+		document.getElementById('portalButton').classList.remove('disabled');
+	else
+		document.getElementById('portalButton').classList.add('disabled');
+}
+
+
+//to set item dependant on catalog
+function catalogChange(){
+	var catalog = gel('catalog').value;
+	var catalogDisplayValue = gel('sys_display.catalog').value;
+	alert(catalogDisplayValue);
+	var itemLookup = gel('lookup.item'); 
+
+	gel('sys_display.item').value = "";
+	gel('item').value = "";
+
+	itemLookup.setAttribute('onclick',"mousePositionSave(event); reflistOpen( 'item', 'not', 'sc_cat_item', '', 'false','QUERY:active=true', 'sc_catalogsLIKE" + catalog + "', '')");
+}
+
+]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_thjuh_mailnow_open_item_in_portal.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<!--
+ <div>
+  <label for="location"><b>Select catalog based on users primary work location:</b></label>
+  <g:ui_reference class="form-control" name="catalog" id="catalog" table="sc_catalog" 
+   query="active=true^titleINService Catalog,Service Catalog Aria,Service Catalog Abington" 
+   field="title" completer="AJAXTableCompleter" columns="description" 
+   mandatory="true" onChange="catalogChange()"/>
+ </div>
+-->
+	<div>
+		<label for="location"><b>Select users primary work location:</b></label>
+		<g:ui_reference class="form-control" name='location' id="location" table="cmn_location" field="name" mandatory="true"
+						query='active=true^sys_idIN${gs.getMessage(gs.getProperty("x_thjuh_mailnow.locations.with.portal"))}'
+						completer="AJAXTableCompleter" columns="description" onChange="locationChange()"/>
+	</div>
+	<br/>
+	<div>
+		<label for="item"><b>Choose a catalog item:</b></label>
+		<g:ui_reference class="form-control" name="item" id="item" table="sc_cat_item" field="Name" mandatory="true"
+						query="active=true^sc_catalogsNOT LIKE32ca7dd66f620b001251f37cbb3ee462^workflowISNOTEMPTY" 
+						onChange="itemChange()" completer="AJAXTableCompleter" columns="sc_catalogs"/>
+	</div>
+	<br/><br/>
+	<div>
+		<button type="button" id="portalButton" class="btn btn-primary btn-lg btn-block disabled" onclick="visitItemInPortal()" style="margin-right:10px;"><b>${gs.getMessage('View Item in Portal')}</b></button>
+	</div>
+
+</j:jelly>]]></html>
+        <name>open_item_in_portal</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>pxp060</sys_created_by>
+        <sys_created_on>2018-11-07 01:39:11</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>46ccf4b64f6da70035e3e5201310c7c3</sys_id>
+        <sys_mod_count>91</sys_mod_count>
+        <sys_name>open_item_in_portal</sys_name>
+        <sys_package display_value="MailNow" source="x_thjuh_mailnow">b8ddaad64fa5670035e3e5201310c7cf</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="MailNow">b8ddaad64fa5670035e3e5201310c7cf</sys_scope>
+        <sys_update_name>sys_ui_page_46ccf4b64f6da70035e3e5201310c7c3</sys_update_name>
+        <sys_updated_by>pxp060</sys_updated_by>
+        <sys_updated_on>2018-11-07 07:03:47</sys_updated_on>
+    </sys_ui_page>
+</record_update>

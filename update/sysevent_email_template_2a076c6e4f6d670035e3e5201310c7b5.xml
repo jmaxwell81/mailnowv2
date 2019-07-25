@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sysevent_email_template">
+    <sysevent_email_template action="INSERT_OR_UPDATE">
+        <collection>x_thjuh_mailnow_outbound</collection>
+        <email_layout/>
+        <message/>
+        <message_html/>
+        <message_list/>
+        <message_text><![CDATA[BEGIN:VCALENDAR
+
+PRODID:-//Service-now.com//Outlook 11.0 MIMEDIR//EN
+
+VERSION:2.0
+
+METHOD:REQUEST
+
+BEGIN:VEVENT
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=TRUE:MAILTO:${to}
+
+ORGANIZER:MAILTO:${organizer}
+
+LOCATION:${location}
+
+DTSTART:${dtstart}
+
+DTEND:${dtend}
+
+UID:${sys_id}
+
+DTSTAMP:${dtstamp}
+
+DESCRIPTION:${description}
+
+SUMMARY:${summary}
+
+X-MICROSOFT-CDO-IMPORTANCE:${importance}
+
+X-MICROSOFT-CDO-BUSYSTATUS:BUSY
+
+X-MICROSOFT-DISALLOW-COUNTER:TRUE
+
+X-SNSYSID:${sys_id}
+
+BEGIN:VALARM
+
+TRIGGER:-PT15M 
+
+ACTION:DISPLAY
+
+DESCRIPTION:Reminder
+
+END:VALARM
+
+END:VEVENT
+
+END:VCALENDAR]]></message_text>
+        <name>mailnow.calendar.template</name>
+        <sms_alternate/>
+        <subject/>
+        <sys_class_name>sysevent_email_template</sys_class_name>
+        <sys_created_by>pxp060</sys_created_by>
+        <sys_created_on>2018-11-06 05:31:53</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>2a076c6e4f6d670035e3e5201310c7b5</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>mailnow.calendar.template</sys_name>
+        <sys_package display_value="MailNow" source="x_thjuh_mailnow">b8ddaad64fa5670035e3e5201310c7cf</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="MailNow">b8ddaad64fa5670035e3e5201310c7cf</sys_scope>
+        <sys_update_name>sysevent_email_template_2a076c6e4f6d670035e3e5201310c7b5</sys_update_name>
+        <sys_updated_by>pxp060</sys_updated_by>
+        <sys_updated_on>2018-11-06 06:42:03</sys_updated_on>
+        <sys_version>2</sys_version>
+    </sysevent_email_template>
+</record_update>

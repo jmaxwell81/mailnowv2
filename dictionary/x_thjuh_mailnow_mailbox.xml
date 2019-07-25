@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="MailBox" max_length="40" name="x_thjuh_mailnow_mailbox" type="collection">
+        <element label="Account" max_length="32" name="account" reference="sys_email_account" reference_qual="active=true^servicenow_configured=false^user_nameISNOTEMPTY^serverISNOTEMPTY^portISNOTEMPTY^EQ" reference_qual_condition="active=true^servicenow_configured=false^user_nameISNOTEMPTY^serverISNOTEMPTY^portISNOTEMPTY^EQ" type="reference"/>
+        <element label="Alias" max_length="40" name="alias" type="string"/>
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#13;&#10;var name = current.alias + &quot; &lt;&quot; + current.account.user_name + &quot;&gt; &quot;;&#13;&#10;return name; &#13;&#10;&#13;&#10;})(current);" display="true" label="Name" max_length="200" name="name" type="string" virtual="true"/>
+        <index name="index">
+            <element name="account"/>
+        </index>
+    </element>
+</database>

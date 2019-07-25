@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name>preview_mailnow</action_name>
+        <active>true</active>
+        <client>true</client>
+        <comments/>
+        <condition/>
+        <form_action>true</form_action>
+        <form_button>true</form_button>
+        <form_context_menu>false</form_context_menu>
+        <form_link>false</form_link>
+        <form_style/>
+        <hint/>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <name>Preview</name>
+        <onclick>previewMailNow()</onclick>
+        <order>100</order>
+        <script><![CDATA[function previewMailNow() {
+	var options = {};
+	options.text = 'Displaying MailNow Notification preview';
+	options.fadeIn = '1500';
+	options.fadeOut = '1500';
+	options.closeDelay = '4000';
+	options.sticky = false;
+	options.type = 'info';
+	//options.image = 'info';
+	
+	new NotificationMessage(options);
+	
+	var target = g_form.getUniqueValue();
+	var allStaff = new GlideAjax('x_thjuh_mailnow.clientUtils');
+	allStaff.addParam('sysparm_name', 'notificationId');
+	allStaff.getXML(showPreview);
+
+	function showPreview(response){
+		var id = response.responseXML.documentElement.getAttribute("answer");
+		var dialogClass = GlideModal ? GlideModal : GlideDialogWindow;
+		var dd = new dialogClass("notification_display");
+		dd.setTitle("MailNow Preview");
+		dd.setWidth(800);
+		dd.setPreference('sysparm_notification_id', id);
+		dd.setPreference('sysparm_target_id', target);
+		dd.setPreference('sysparm_user_id', g_user.userID);
+		dd.setPreference('sysparm_changed_fields',g_form.serializeChangedAll());
+		dd.render();
+	}
+}]]></script>
+        <show_insert>false</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>pxp060</sys_created_by>
+        <sys_created_on>2018-11-06 19:30:17</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_id>d2c76fe20fe16700d0c4918172050ec8</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>Preview</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="MailNow" source="x_thjuh_mailnow">b8ddaad64fa5670035e3e5201310c7cf</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="MailNow">b8ddaad64fa5670035e3e5201310c7cf</sys_scope>
+        <sys_update_name>sys_ui_action_d2c76fe20fe16700d0c4918172050ec8</sys_update_name>
+        <sys_updated_by>pxp060</sys_updated_by>
+        <sys_updated_on>2018-11-06 20:21:41</sys_updated_on>
+        <table>x_thjuh_mailnow_outbound</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>

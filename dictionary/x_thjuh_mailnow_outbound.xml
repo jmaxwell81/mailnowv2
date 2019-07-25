@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element attributes="calendar_elements=subject;state,hasLabels=true" label="Outbound" max_length="40" name="x_thjuh_mailnow_outbound" type="collection">
+        <element default="true" label="Active" max_length="40" name="active" read_only="true" type="boolean"/>
+        <element label="AllStaff" max_length="40" name="allstaff" type="boolean"/>
+        <element label="Body" max_length="8000" name="body" type="html"/>
+        <element label="Comments" max_length="4000" name="comments" type="journal"/>
+        <element label="Distribution List" max_length="4000" name="distribution_list" reference="sys_user" type="glide_list"/>
+        <element label="Email Addresses" max_length="250000" name="email_addresses" type="string_full_utf8"/>
+        <element label="Followup on" max_length="40" name="followup_on" type="glide_date_time"/>
+        <element label="Groups" max_length="4000" name="groups" reference="sys_user_group" type="glide_list"/>
+        <element choice="1" label="Importance" max_length="40" name="importance" type="choice">
+            <choice>
+                <element label="High" sequence="0" value="High"/>
+                <element label="Low" sequence="1" value="Low"/>
+            </choice>
+        </element>
+        <element label="Location" max_length="32" name="location" reference="cmn_location" type="reference"/>
+        <element label="MailBox" max_length="32" name="mailbox" reference="x_thjuh_mailnow_mailbox" type="reference"/>
+        <element label="Mails Received" max_length="40" name="mails_received" type="integer"/>
+        <element label="Mails Sent" max_length="40" name="mails_sent" type="integer"/>
+        <element label="Meeting End" max_length="40" name="meeting_end" type="glide_date_time"/>
+        <element label="Meeting Invite" max_length="40" name="meeting_invite" type="boolean"/>
+        <element label="Meeting Location" max_length="40" name="meeting_location" type="string"/>
+        <element label="Meeting Start" max_length="40" name="meeting_start" type="glide_date_time"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" display="true" label="Number" max_length="40" name="number" type="string"/>
+        <element label="Organizer" max_length="32" name="organizer" reference="sys_user" type="reference"/>
+        <element default="javascript: gs.getUserId()" label="Owned By" max_length="32" name="owned_by" reference="sys_user" type="reference"/>
+        <element choice="1" label="Recipient Type" max_length="40" name="recipient_type" type="choice">
+            <choice/>
+        </element>
+        <element label="Related Changes" max_length="4000" name="related_changes" reference="change_request" type="glide_list"/>
+        <element label="Related Incidents" max_length="4000" name="related_incidents" reference="incident" type="glide_list"/>
+        <element label="Related Problems" max_length="4000" name="related_problems" reference="problem" type="glide_list"/>
+        <element label="Related Tasks" max_length="4000" name="related_tasks" reference="task" type="glide_list"/>
+        <element label="Remainder Date Time" max_length="40" name="remainder_date_time" type="glide_date_time"/>
+        <element label="Roles" max_length="4000" name="roles" reference="sys_user_role" type="glide_list"/>
+        <element label="Schedule For" max_length="40" name="schedule_for" type="glide_date_time"/>
+        <element choice="1" label="Schedule For Future" max_length="40" name="schedule_for_future" type="choice">
+            <choice/>
+        </element>
+        <element label="SendNow" max_length="40" name="sendnow" type="boolean"/>
+        <element choice="1" label="Send Followup" max_length="40" name="send_followup" type="choice">
+            <choice/>
+        </element>
+        <element choice="1" label="Set Remainder" max_length="40" name="set_remainder" type="choice">
+            <choice/>
+        </element>
+        <element choice="1" default="pending" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element label="Pending" sequence="0" value="pending"/>
+                <element label="Draft" sequence="1" value="draft"/>
+                <element label="Ignored" sequence="2" value="ignored"/>
+                <element label="Scheduled" sequence="3" value="scheduled"/>
+                <element label="Sent" sequence="4" value="sent"/>
+                <element label="Cancelled" sequence="5" value="cancelled"/>
+            </choice>
+        </element>
+        <element label="Subject" max_length="100" name="subject" type="string"/>
+        <element choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element label="Announcement" sequence="0" value="announcement"/>
+                <element label="Outage" sequence="1" value="outage"/>
+                <element label="Emergency" sequence="2" value="emergency"/>
+                <element label="Incident" sequence="3" value="incident"/>
+                <element label="Problem" sequence="4" value="problem"/>
+                <element label="Change" sequence="5" value="change"/>
+            </choice>
+        </element>
+        <element label="Users" max_length="4000" name="users" reference="sys_user" type="glide_list"/>
+        <index name="index">
+            <element name="mailbox"/>
+        </index>
+        <index name="index2">
+            <element name="organizer"/>
+        </index>
+        <index name="index3">
+            <element name="location"/>
+        </index>
+        <index name="index4">
+            <element name="owned_by"/>
+        </index>
+    </element>
+</database>
